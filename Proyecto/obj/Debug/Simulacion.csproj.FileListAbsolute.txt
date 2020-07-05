@@ -1,0 +1,11 @@
+C:\Users\rodol\Desktop\Simulacion\Proyecto\bin\Debug\Proyecto.exe.config
+C:\Users\rodol\Desktop\Simulacion\Proyecto\bin\Debug\Proyecto.exe
+C:\Users\rodol\Desktop\Simulacion\Proyecto\bin\Debug\Proyecto.pdb
+C:\Users\rodol\Desktop\Simulacion\Proyecto\obj\Debug\Simulacion.csprojAssemblyReference.cache
+C:\Users\rodol\Desktop\Simulacion\Proyecto\obj\Debug\Proyecto.Contenedor.resources
+C:\Users\rodol\Desktop\Simulacion\Proyecto\obj\Debug\Proyecto.Form.resources
+C:\Users\rodol\Desktop\Simulacion\Proyecto\obj\Debug\Proyecto.Properties.Resources.resources
+C:\Users\rodol\Desktop\Simulacion\Proyecto\obj\Debug\Simulacion.csproj.GenerateResource.cache
+C:\Users\rodol\Desktop\Simulacion\Proyecto\obj\Debug\Simulacion.csproj.CoreCompileInputs.cache
+C:\Users\rodol\Desktop\Simulacion\Proyecto\obj\Debug\Proyecto.exe
+C:\Users\rodol\Desktop\Simulacion\Proyecto\obj\Debug\Proyecto.pdb
