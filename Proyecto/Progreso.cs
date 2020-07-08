@@ -88,7 +88,12 @@ namespace Proyecto
 
         public void UpdateTextColor()
         {
-            switch(ProgresoValue)
+            lblGenerador.ForeColor = Color.White;
+            lblPrueba1.ForeColor = Color.White;
+            lblPrueba2.ForeColor = Color.White;
+            lblSimulacion.ForeColor = Color.White;
+
+            switch (ProgresoValue)
             {
                 case 0:
                     lblGenerador.ForeColor = Color.FromArgb(33, 243, 23);

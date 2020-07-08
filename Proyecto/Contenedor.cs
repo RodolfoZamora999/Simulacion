@@ -8,13 +8,16 @@ namespace Proyecto
 {
     class Contenedor : System.Windows.Forms.Panel
     {
+        private Panel panel;
+
         private Progreso progreso;
         private PanelGenerador panelGenerador;
 
         private Button btnAbortar;
 
-        public Contenedor()
+        public Contenedor(Panel panel)
         {
+            this.panel = panel;
             InitializeComponent();
         }
 
@@ -44,6 +47,10 @@ namespace Proyecto
         };
             btnAbortar.FlatAppearance.BorderSize = 0;
             this.btnAbortar.Click += Clic_Abortar;
+            this.btnAbortar.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            this.btnAbortar.FlatAppearance.BorderSize = 0;
+            this.btnAbortar.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            this.btnAbortar.FlatAppearance.BorderColor = Color.FromArgb(40, 40, 40);
             this.Controls.Add(this.btnAbortar);
         }
 
@@ -62,9 +69,11 @@ namespace Proyecto
                 return;
 
             //Destruimos todo
-            this.Controls.Clear();
+            this.panel.Controls.Clear();
+            this.Dispose();
 
-            //Tenemos que invocarel panel principal, esto quedara pendiente...
+            PanelInicio panelInicio = new PanelInicio(panel);
+            this.panel.Controls.Add(panelInicio);
         }
     }
 }

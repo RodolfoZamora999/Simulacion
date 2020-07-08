@@ -141,7 +141,7 @@ namespace Proyecto
             this.lblInformacion = new Label
             {
                 Text = "",
-                Size = new Size(390, 60),
+                Size = new Size(320, 60),
                 Location = new Point(20, 155),
                 Font = new Font("Calibri", 12f)
             };
@@ -217,6 +217,21 @@ namespace Proyecto
                 picture.Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\images\\desarprobado.png");
                 lblInformacion.Text = "No puedes proseguir con la siguiente prueba." +
                     "\r\nIntenta con otra muestra de números diferente.";
+
+                Button button = new Button 
+                {
+                    Size = new Size(45, 45),
+                    Location = new Point(340, 150),
+                    BackColor = Color.White,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    FlatStyle = FlatStyle.Flat,
+                    Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\images\\reload.png"),
+                    ImageAlign = ContentAlignment.MiddleCenter
+                };
+                button.FlatAppearance.BorderSize = 0;
+                button.Click += BtnReiniciar;
+                panelResultados.Controls.Add(button);
+
                 MessageBox.Show("Prueba fallida...");
             }        
         }
@@ -232,6 +247,22 @@ namespace Proyecto
             this.lblJiTabla.Text = "JiCuadrado tabla:       " + jiTabla;
         }
 
+        private void BtnReiniciar(object sender, EventArgs e)
+        {
+            //Limpiamos la interfaz
+            this.contenedor.Controls.Remove(this);
+            this.Dispose();
+
+
+            progreso.ProgresoValue = 0;
+            progreso.UpdateTextColor();
+
+            //Instancia del panel
+            PanelGenerador panel = new PanelGenerador(progreso, contenedor);
+            contenedor.Refresh();
+            contenedor.Controls.Add(panel);
+        }
+
         private void BtnSiguiente(Object sender, EventArgs e)
         {
             progreso.ProgresoValue += 1;
@@ -239,6 +270,7 @@ namespace Proyecto
             progreso.Refresh();
 
             contenedor.Controls.Remove(this);
+            this.Dispose();
 
             PanelPrueba2 panel = new PanelPrueba2(matrizNumeros, progreso, contenedor);
             contenedor.Controls.Add(panel);

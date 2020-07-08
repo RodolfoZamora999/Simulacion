@@ -273,7 +273,7 @@ namespace ConversionCodigo
 
             //Quinto paso: Calcular la JiCuadrada
             double jiCuadrada = CalcularJiCuadrada(frecEsperada, frecObservada);
-            stringb.Append("\r\nValor de JiCuadrada calculado: " + jiCuadrada + "\r\n");
+            stringb.Append("\r\nValor de JiCuadrada calculado:\r\n" + jiCuadrada + "\r\n");
 
             return BuscarValor(jiCuadrada, longitudes.Length);
         }

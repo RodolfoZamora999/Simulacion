@@ -196,7 +196,7 @@ namespace ConversionCodigo
 
             double JiCuadrada = CalcularJiCuadrada(valorEsperado, frecuenciasObservadas);
 
-            stringb.Append("\r\nValor de JiCuadrada calculado: " + JiCuadrada + "\r\n");
+            stringb.Append("\r\nValor de JiCuadrada calculado:\r\n" + JiCuadrada + "\r\n");
 
             return BuscarValor(JiCuadrada);
         }

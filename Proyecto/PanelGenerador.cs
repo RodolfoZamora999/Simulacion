@@ -17,7 +17,7 @@ namespace Proyecto
         private TextBox txtMulti, txtAditivo, txtSemilla, txtModulo, txtCantidad;
 
         private Progreso progreso;
-        private Button btnSiguiente, btnGenerar, btnSave;
+        private Button btnSiguiente, btnGenerar, btnSave, btnClean;
         private ListView listView;
 
         private Panel panelGenerar, panelCargar;
@@ -217,15 +217,16 @@ namespace Proyecto
 
             this.btnSave = new Button
             {
-                Size = new Size(50, 50),
-                Location = new Point(350, 140),
+                Size = new Size(30, 30),
+                Location = new Point(370, 160),
                 Font = new Font("Calibri", 18f),
-                BackColor = Color.FromArgb(41, 183, 18),
+                BackColor = Color.Transparent,
                 TextAlign = ContentAlignment.MiddleCenter,
-                ForeColor = Color.Transparent,
                 Enabled = false,
-                Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\images\\save.png")
+                Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\images\\save2.png"),
+                FlatStyle = FlatStyle.Flat    
             };
+            this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.Click += GuardarNumeros;
 
             this.panelGenerar.Controls.Add(this.btnSave);
@@ -437,12 +438,27 @@ namespace Proyecto
             Label lblCargar = new Label
             {
                 Text = "Cargar números guardados",
-                Size = new Size(panelCargar.Width, 30),
+                Size = new Size(panelCargar.Width - 50, 30),
                 Location = new Point(0, 0),
                 Font = new Font("Calibri", 14f),
                 TextAlign = ContentAlignment.MiddleCenter
             };
             panel.Controls.Add(lblCargar);
+
+            this.btnClean = new Button 
+            {
+                Size = new Size(40, 40),
+                Location = new Point(368, 0),
+                BackColor = Color.White,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Enabled = false, 
+                FlatStyle = FlatStyle.Flat,
+                Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\images\\basura.png"),
+                ImageAlign = ContentAlignment.MiddleCenter
+            };
+            btnClean.FlatAppearance.BorderSize = 0;
+            this.btnClean.Click += BtnCleanEvento;
+            panel.Controls.Add(btnClean);
 
             string[] files;
 
@@ -480,7 +496,9 @@ namespace Proyecto
                     ListViewItem item = new ListViewItem(new String[] { Path.GetFileName(files[i]), 
                         File.GetCreationTime(files[i]).ToString() });
                     list.Items.Add(item);
-                } 
+                }
+
+                btnClean.Enabled = true;
             }
 
             else 
@@ -494,6 +512,8 @@ namespace Proyecto
                     ForeColor = Color.Gray,
                     TextAlign = ContentAlignment.MiddleCenter
                 };
+
+                this.btnClean.Enabled = false;
 
                 panel.Controls.Add(label);
             }
@@ -625,6 +645,29 @@ namespace Proyecto
         }
 
         /// <summary>
+        /// Evento para el botón de borrado. Borra todos los archivos almacenados
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnCleanEvento(object sender, EventArgs e)
+        {
+            DialogResult dialog  = MessageBox.Show("¿Está seguro de eliminar todos los archivos?", "Atención",
+                MessageBoxButtons.YesNo);
+
+            if (dialog.ToString().Equals("No"))
+                return;
+
+            string[] archivos = Directory.GetFiles(Directory.GetCurrentDirectory() + "\\save\\");
+
+            foreach (var value in archivos)
+                File.Delete(value);
+
+            MessageBox.Show("Archivos eliminados");
+
+            CargarAchivos(panelCargar);
+        }
+
+        /// <summary>
         /// Evento para el botón de siguiente.
         /// </summary>
         /// <param name="sender"></param>
@@ -636,6 +679,7 @@ namespace Proyecto
             progreso.Refresh();
 
             contenedor.Controls.Remove(this);
+            this.Dispose();
 
             PanelPrueba1 panel = new PanelPrueba1(numeros, progreso, contenedor);
             contenedor.Controls.Add(panel);

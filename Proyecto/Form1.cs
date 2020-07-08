@@ -16,11 +16,5 @@ namespace Proyecto
         {
             InitializeComponent();
         }
-
-        private void btnIniciar_Click(object sender, EventArgs e)
-        {
-            this.Controls.Clear();
-            this.Controls.Add(new Contenedor());
-        }
     }
 }

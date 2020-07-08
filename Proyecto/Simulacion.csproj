@@ -61,10 +61,19 @@
     <Compile Include="PanelGenerador.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PanelInicio.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PanelPrueba1.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PanelPrueba2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PanelSimulacion.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PanelSimulacion2.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
