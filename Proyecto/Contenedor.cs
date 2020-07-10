@@ -13,7 +13,7 @@ namespace Proyecto
         private Progreso progreso;
         private PanelGenerador panelGenerador;
 
-        private Button btnAbortar;
+        private Button btnAbortar, btnAyuda;
 
         public Contenedor(Panel panel)
         {
@@ -44,14 +44,31 @@ namespace Proyecto
                 BackColor = Color.Transparent,
                 FlatStyle = FlatStyle.Flat,
                 Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\images\\abort.png")
-        };
+            };
             btnAbortar.FlatAppearance.BorderSize = 0;
             this.btnAbortar.Click += Clic_Abortar;
             this.btnAbortar.FlatAppearance.MouseDownBackColor = Color.Transparent;
             this.btnAbortar.FlatAppearance.BorderSize = 0;
             this.btnAbortar.FlatAppearance.MouseOverBackColor = Color.Transparent;
             this.btnAbortar.FlatAppearance.BorderColor = Color.FromArgb(40, 40, 40);
+
+            this.btnAyuda = new Button
+            {
+                Size = new Size(60, 60),
+                Location = new Point(15, 20),
+                BackColor = Color.Transparent,
+                FlatStyle = FlatStyle.Flat,
+                Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\images\\help.png")
+            };
+            this.btnAyuda.Click += BtnAyuda;
+            this.btnAyuda.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            this.btnAyuda.FlatAppearance.BorderSize = 0;
+            this.btnAyuda.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            this.btnAyuda.FlatAppearance.BorderColor = Color.FromArgb(40, 40, 40);
+
+
             this.Controls.Add(this.btnAbortar);
+            this.Controls.Add(this.btnAyuda);
         }
 
 
@@ -72,8 +89,19 @@ namespace Proyecto
             this.panel.Controls.Clear();
             this.Dispose();
 
+            GC.Collect();
+
             PanelInicio panelInicio = new PanelInicio(panel);
             this.panel.Controls.Add(panelInicio);
+        }
+
+        private void BtnAyuda(object sender, EventArgs e)
+        {
+            //this.panel.Controls.Clear();
+            PanelAyuda panel = new PanelAyuda();
+
+            this.panel.Controls.Add(panel);
+            this.panel.Controls.SetChildIndex(panel, 0);
         }
     }
 }

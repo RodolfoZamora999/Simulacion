@@ -58,6 +58,9 @@
     </Compile>
     <Compile Include="Generador.cs" />
     <Compile Include="JiCuadrada.cs" />
+    <Compile Include="PanelAyuda.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PanelGenerador.cs">
       <SubType>Component</SubType>
     </Compile>

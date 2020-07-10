@@ -79,6 +79,10 @@ namespace ConversionCodigo
         {
             double valor = Math.Round(Math.Sqrt(longitud));
 
+            //Limite para las cosas sigan bien
+            if (valor > 40)
+                valor = 40;
+
             return valor;
         }
 
