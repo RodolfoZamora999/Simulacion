@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Proyecto
@@ -21,7 +18,7 @@ namespace Proyecto
 
         private ListView listViewAgnos, listViewMeses, listViewDistribucion;
 
-        private Button btnSimular;
+        private Button btnSimular, btnEditar;
 
         private double[] probabilidad;
 
@@ -171,6 +168,20 @@ namespace Proyecto
             };
             this.btnSimular.Click += BtnEventSimular;
 
+            this.btnEditar = new Button 
+            {
+                Size = new Size(50, 50),
+                Location = new Point(670, 90),
+                Text = "",
+                TextAlign = ContentAlignment.MiddleCenter,
+                Font = new Font("Calibri", 14f),
+                BackColor = Color.FromArgb(40, 140, 250),
+                ForeColor = Color.White,
+                Image = Image.FromFile(Directory.GetCurrentDirectory() + "\\images\\edit.png"),
+                ImageAlign = ContentAlignment.MiddleCenter
+            };
+            this.btnEditar.Click += BtnEventEdit;
+
 
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblDescripcion);
@@ -183,27 +194,39 @@ namespace Proyecto
             this.Controls.Add(this.listViewDistribucion);
             this.Controls.Add(this.lblDistribucion);
             this.Controls.Add(this.lblTotalProbabilidad);
+            this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnSimular);
         }
 
 
         private void CargarDatos()
         {
-            //Creación de la lista
+            //Verificación de la existencia del archivo 
+            string ruta = Directory.GetCurrentDirectory() + "\\data\\data_years.txt";
+
+            bool status = File.Exists(ruta);
+
+            if (!status)
+                return;
+
+            //Creación de la lista de hocimicidios por año
             List<Datos> list = new List<Datos>();
 
-            //Cargamos la lista
-            list.Add(new Datos("2008", 14006));
-            list.Add(new Datos("2009", 19803));
-            list.Add(new Datos("2010", 25757));
-            list.Add(new Datos("2011", 27213));
-            list.Add(new Datos("2012", 25967));
-            list.Add(new Datos("2013", 23063));
-            list.Add(new Datos("2014", 20010));
-            list.Add(new Datos("2015", 20762));
-            list.Add(new Datos("2016", 24559));
-            list.Add(new Datos("2017", 32079));
-            list.Add(new Datos("2018", 36685));
+            //Abrimos el archivo 
+            StreamReader stream = new StreamReader(ruta);
+
+            string agno;
+            string prob;
+            while((agno = stream.ReadLine()) != null)
+            {
+                prob = stream.ReadLine();
+
+                list.Add(new Datos(agno, Int32.Parse(prob)));
+            }
+
+            //Cierre del flujo de datos
+            stream.Close();
+            
 
             foreach (Datos dato in list)
             {
@@ -220,20 +243,25 @@ namespace Proyecto
             this.lblTotalAgno.Text = "Total: " + sumaTotal;
 
 
-            //Cargamos de nuevo
+            //Abrimos el segundo archivo
+            ruta = Directory.GetCurrentDirectory() + "\\data\\data_month.txt";
+
+            status = File.Exists(ruta);
+
+            if (!status)
+                return;
+
+            StreamReader stream2 = new StreamReader(ruta);
+
+            //Limpieza de la lista
             list.Clear();
-            list.Add(new Datos("Enero", 20233));
-            list.Add(new Datos("Febrero", 19343));
-            list.Add(new Datos("Marzo", 21576));
-            list.Add(new Datos("Abril", 21543));
-            list.Add(new Datos("Mayo", 23697));
-            list.Add(new Datos("Junio", 23008));
-            list.Add(new Datos("Julio", 22991));
-            list.Add(new Datos("Agosto", 23778));
-            list.Add(new Datos("Septiembre", 23244));
-            list.Add(new Datos("Octubre", 23894));
-            list.Add(new Datos("Noviembre", 22464));
-            list.Add(new Datos("Diciembre", 24133));
+
+            while ((agno = stream2.ReadLine()) != null)
+            {
+                prob = stream2.ReadLine();
+
+                list.Add(new Datos(agno, Int32.Parse(prob)));
+            }
 
             foreach (Datos dato in list)
             {
@@ -269,6 +297,14 @@ namespace Proyecto
                 suma += value;
 
             this.lblTotalProbabilidad.Text = "Total: " + suma;
+        }
+
+        private void BtnEventEdit(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Form form = new System.Windows.Forms.Form();
+            form.Size = new Size(400, 500);
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.Visible = true;
         }
 
         private void BtnEventSimular(object sender, EventArgs e)
