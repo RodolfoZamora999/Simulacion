@@ -52,6 +52,7 @@ namespace Proyecto
             this.btnAbortar.FlatAppearance.MouseOverBackColor = Color.Transparent;
             this.btnAbortar.FlatAppearance.BorderColor = Color.FromArgb(40, 40, 40);
 
+            /*
             this.btnAyuda = new Button
             {
                 Size = new Size(60, 60),
@@ -64,11 +65,11 @@ namespace Proyecto
             this.btnAyuda.FlatAppearance.MouseDownBackColor = Color.Transparent;
             this.btnAyuda.FlatAppearance.BorderSize = 0;
             this.btnAyuda.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            this.btnAyuda.FlatAppearance.BorderColor = Color.FromArgb(40, 40, 40);
+            this.btnAyuda.FlatAppearance.BorderColor = Color.FromArgb(40, 40, 40);*/
 
 
             this.Controls.Add(this.btnAbortar);
-            this.Controls.Add(this.btnAyuda);
+           // this.Controls.Add(this.btnAyuda);
         }
 
 

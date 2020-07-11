@@ -29,20 +29,25 @@
         private void InitializeComponent()
         {
             this.panel = new System.Windows.Forms.Panel();
+            this.panelInicio = new Proyecto.PanelInicio(panel);
+            this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.panelInicio);
             this.panel.Location = new System.Drawing.Point(0, 0);
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(785, 565);
             this.panel.TabIndex = 0;
-
-            //Le meto un poco de mi sopa
-            PanelInicio panelInicio = new PanelInicio(panel);
-            this.panel.Controls.Add(panelInicio);
-
-
+            // 
+            // panelInicio
+            // 
+            this.panelInicio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panelInicio.Location = new System.Drawing.Point(0, 0);
+            this.panelInicio.Name = "panelInicio";
+            this.panelInicio.Size = new System.Drawing.Size(785, 565);
+            this.panelInicio.TabIndex = 0;
             // 
             // Form
             // 
@@ -56,6 +61,7 @@
             this.Name = "Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Proyecto";
+            this.panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -63,6 +69,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel;
+        private PanelInicio panelInicio;
     }
 }
 

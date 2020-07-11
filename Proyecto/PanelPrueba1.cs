@@ -59,7 +59,7 @@ namespace Proyecto
 
             this.lblNumeros = new Label()
             {
-                Text = "Números propocionados:     " + matrizNumeros.Length,
+                Text = "Números proporcionados:     " + matrizNumeros.Length,
                 Size = new Size(320, 25),
                 Location = new Point(382, 50),
                 Font = new Font("Calibri", 14f)

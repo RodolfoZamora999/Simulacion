@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Proyecto
@@ -7,8 +8,6 @@ namespace Proyecto
     class PanelInicio : Panel
     {
         private Panel panel;
-
-        private Label lblTitle;
         private Button btnInicio;
 
         public PanelInicio()
@@ -27,28 +26,23 @@ namespace Proyecto
             //Propiedades del panel
             this.Size = new Size(785, 565);
             this.Location = new Point(0, 0);
-            this.BackColor = Color.FromArgb(40, 40, 40);
-
-            this.lblTitle = new Label 
-            {
-                Size = new Size(500, 70),
-                Location = new Point(142, 43),
-                Text = "Simulador 2020", 
-                Font = new Font("Arial", 48), 
-                ForeColor = Color.White
-            };
+            //this.BackColor = Color.FromArgb(40, 40, 40);
+            this.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\images\\fondo.jpg");
 
             this.btnInicio = new Button
             {
-                Size = new Size(200, 80),
-                Location = new Point(304, 467),
+                Size = new Size(250, 100),
+                Location = new Point((785 - 250) / 2, 200),
                 Text = "Iniciar",
-                Font = new Font("Arial", 18f, FontStyle.Bold),
-                FlatStyle = FlatStyle.System
+                Font = new Font("Arial", 24f, FontStyle.Bold),
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.Transparent,
+                ForeColor = Color.White
             };
+            this.btnInicio.FlatAppearance.MouseDownBackColor = Color.FromArgb(30, 255, 0, 0);
+            this.btnInicio.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 0, 0, 255);
             this.btnInicio.Click += BtnEventInicio;
-
-            this.Controls.Add(this.lblTitle);
+           
             this.Controls.Add(this.btnInicio);
         }
 
