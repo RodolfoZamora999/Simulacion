@@ -1,4 +1,3 @@
-# Simulacion
 # **Simulador de homicidios dolosos en México** 
 
 [Texto pendiente....]
